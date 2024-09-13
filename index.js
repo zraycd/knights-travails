@@ -1,4 +1,7 @@
-function knightMoves(start, finish) {
+function knightMoves(start, finish, moves = []) {
+  moves.push(start);
+  let allPossibleMoves = getAllPos(start);
+
   let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -9,6 +12,14 @@ function knightMoves(start, finish) {
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
   ];
+  allPossibleMoves.forEach((pos) => {
+    board[pos[0]][pos[1]] = 1;
+  });
+  if (board[finish[0]][finish[1]] === 1) {
+    moves.push(finish);
+    return moves;
+  } else {
+  }
 }
 
 function getAllPos(pos, possibleMoves = []) {

@@ -1,25 +1,28 @@
+let board = [
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+];
 function knightMoves(start, finish, moves = []) {
   moves.push(start);
   let allPossibleMoves = getAllPos(start);
 
-  let board = [
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-  ];
-  allPossibleMoves.forEach((pos) => {
+  for (let i = 0; i < allPossibleMoves.length; i++) {
+    let pos = allPossibleMoves[i];
     board[pos[0]][pos[1]] = 1;
-  });
-  if (board[finish[0]][finish[1]] === 1) {
-    moves.push(finish);
-    return moves;
-  } else {
+    if (board[finish[0]][finish[1]] === 1) {
+      moves.push(finish);
+      break;
+    } else {
+      return knightMoves(pos, finish, moves);
+    }
   }
+  return moves;
 }
 
 function getAllPos(pos, possibleMoves = []) {
